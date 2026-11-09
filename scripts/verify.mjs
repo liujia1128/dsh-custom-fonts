@@ -372,6 +372,46 @@ await check('installed fonts appear in every field\'s <datalist> options', () =>
   }
 })
 
+await check('霞鹜文楷 / LXGW WenKai is offered in the Chinese UI font field', () => {
+  const families = [
+    '霞鹜文楷', 'LXGW WenKai', '霞鹜文楷 屏幕阅读版',
+    'LXGW WenKai Screen', 'LXGW WenKai Lite', 'LXGW WenKai TC',
+  ]
+  const mono = ['霞鹜文楷等宽', 'LXGW WenKai Mono', 'LXGWWenKaiMono Nerd Font']
+  assert.deepEqual([...I1.LXGW_WENKAI], families)
+  assert.deepEqual([...I1.LXGW_WENKAI_MONO], mono)
+  families.forEach((n) => assert(I1.ZH_FONTS.includes(n), 'ZH_FONTS missing ' + n))
+  mono.forEach((n) => assert(I1.CODE_FONTS.includes(n), 'CODE_FONTS missing ' + n))
+
+  // The Chinese field really renders these names as selectable options.
+  const s6 = factory(requireStub)
+  const c6 = makeCtx()
+  s6.apply(c6.ctx)
+  const lists = datalists(React.render(c6.registered[0].component))
+  const zh = lists.find((d) => d.props && d.props.id === I1.SLOT_ID + '-zh-list')
+  assert(zh, 'Chinese font datalist not found')
+  const values = optionsOf(zh)
+  families.forEach((n) => assert(values.includes(n), 'Chinese datalist missing ' + n))
+  const code = lists.find((d) => d.props && d.props.id === I1.SLOT_ID + '-code-list')
+  assert(code, 'Code font datalist not found')
+  mono.forEach((n) => assert(optionsOf(code).includes(n), 'Code datalist missing ' + n))
+
+  // Names with spaces / CJK survive CSS quoting and reach the generated rule.
+  assert.equal(I1.quoteList('霞鹜文楷, LXGW WenKai'), "'霞鹜文楷', 'LXGW WenKai'")
+  assert(I1.buildCss({ zh: '霞鹜文楷' }).includes("'霞鹜文楷' !important"))
+  // Placeholders advertise the new font in both languages + locale files.
+  I1.setLang('zh')
+  assert(I1.t('phZh').includes('霞鹜文楷'))
+  I1.setLang('en')
+  assert(I1.t('phZh').includes('LXGW WenKai'))
+  for (const p of ['locale/en.json', 'locale/zh.json', 'locale/zh-CN.json']) {
+    assert(/LXGW WenKai|霞鹜文楷/.test(read(p)), p + ' must advertise the new font')
+  }
+  for (const p of ['README.md', 'README.zh-CN.md', 'INSTALL.md', 'INSTALL.zh-CN.md']) {
+    assert(/LXGW WenKai|霞鹜文楷/.test(read(p)), p + ' must document the new font')
+  }
+})
+
 await check('styles use only --dsw-alias-* tokens; no extra runtime requires', () => {
   const src = read('client/client.js')
   const vars = [...src.matchAll(/var\((--[^)]+)\)/g)].map((m) => m[1])

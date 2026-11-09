@@ -15,7 +15,7 @@
 ```sh
 git clone https://github.com/liujia1128/dsh-custom-fonts.git
 cd dsh-custom-fonts
-node scripts/verify.mjs        # 16 项无头检查，零依赖
+node scripts/verify.mjs        # 17 项无头检查，零依赖
 ```
 
 然后在 Harness 插件管理器中安装本包（或写入下方 bundle patch 行）、启用、刷新一次页面。三种安装方式、每个控件、卸载与故障排查的完整步骤见 [INSTALL.zh-CN.md](./INSTALL.zh-CN.md)。
@@ -32,11 +32,12 @@ node scripts/verify.mjs        # 16 项无头检查，零依赖
 | 控件 | 作用 |
 | --- | --- |
 | **UI 字体 · 英文** | 拉丁文字（Segoe UI、Arial、Georgia …）。 |
-| **UI 字体 · 中文** | 汉字（微软雅黑、思源黑体、苹方 …）。 |
+| **UI 字体 · 中文** | 汉字（霞鹜文楷 / LXGW WenKai 开源楷体，微软雅黑、思源黑体、苹方 …）。 |
 | **代码字体** | 为 `pre`、`code`、`kbd`、`samp` 与代码块单独指定等宽字体。 |
 | **字号偏移** | −4…+8 px 滑杆，**只**在 `:root` 应用一次。 |
 | **扫描本机字体** | 枚举这台机器上的字体，合并进三个候选列表。 |
 
+- **霞鹜文楷 (LXGW WenKai)** —— 开源楷体（SIL OFL 1.1），字形优美、社区人气高，已作为内置建议加入「UI 字体 · 中文」；`Screen` / `Lite` / `TC` / 中文名等别名一并收录，等宽版「霞鹜文楷等宽」/ `LXGW WenKai Mono` / `LXGWWenKaiMono Nerd Font` 放进代码字体列表。插件只写入字体族名称，不含字体文件，需先在本机安装该字体。
 - **本机字体发现** —— `window.queryLocalFonts()`（精确系统字体名；Chromium，可能弹出权限请求）→ canvas `measureText` 探测（约 70 个跨平台候选名）→ 内置建议。去重排序、上限 800 条、结果本地缓存。
 - **设置持久化** —— 每次改动写入 `localStorage`，并由 `apply()` 在启动时重放，刷新后取值与注入的样式表都会恢复。
 - **实时预览** —— 中英混排示例 + 代码字体示例。

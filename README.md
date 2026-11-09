@@ -15,7 +15,7 @@ Customize the DeepSeek Harness UI fonts from a **Settings → Fonts** page: sepa
 ```sh
 git clone https://github.com/liujia1128/dsh-custom-fonts.git
 cd dsh-custom-fonts
-node scripts/verify.mjs        # 16 headless checks, zero dependencies
+node scripts/verify.mjs        # 17 headless checks, zero dependencies
 ```
 
 Then install the package through the Harness plugin manager (or add the bundle patch row below), enable it, and refresh the page once. Full walkthrough — three install methods, every control, uninstall and troubleshooting — is in [INSTALL.md](./INSTALL.md).
@@ -32,11 +32,12 @@ Then install the package through the Harness plugin manager (or add the bundle p
 | Control | What it does |
 | --- | --- |
 | **UI font · Latin** | Latin text (Segoe UI, Arial, Georgia, …). |
-| **UI font · Chinese** | Han characters (微软雅黑, 思源黑体, 苹方, …). |
+| **UI font · Chinese** | Han characters — 霞鹜文楷 / LXGW WenKai (open-source Kaiti, built in), 微软雅黑, 思源黑体, 苹方, …. |
 | **Code font** | A separate mono face for `pre`, `code`, `kbd`, `samp` and code blocks. |
 | **Font-size offset** | −4…+8 px slider, applied **once** at `:root`. |
 | **Scan installed fonts** | Enumerates fonts on this device and merges them into all three lists. |
 
+- **LXGW WenKai (霞鹜文楷)** — an open-source Kaiti (楷体) face under SIL OFL 1.1, popular for personalized UIs, is a built-in option in the Chinese font field. Its `Screen`, `Lite`, `TC` and localized name variants are included, and the monospace sibling `霞鹜文楷等宽` / `LXGW WenKai Mono` / `LXGWWenKaiMono Nerd Font` is offered in the code font field. Install the font on your device first — the plugin references family names only, it does not ship font files.
 - **Installed-font discovery** — `window.queryLocalFonts()` (exact OS family names; Chromium, permission may be requested) → canvas `measureText` probe over a ~70-name cross-platform pool → built-in suggestions. Deduplicated, sorted, capped at 800, cached locally.
 - **Saved settings** — every change goes to `localStorage` and is replayed at boot by `apply()`, so a reload restores both the values and the injected stylesheet.
 - **Live preview** — mixed Latin/Chinese sample plus a code-font sample.

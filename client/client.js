@@ -40,15 +40,31 @@ window.__ModuleLoader__.load({
       'Segoe UI', 'Arial', 'Helvetica', 'Georgia', 'Times New Roman',
       'Courier New', 'Consolas', 'Verdana', 'Calibri', 'Tahoma', 'Inter',
     ]
+    // 霞鹜文楷 (LXGW WenKai) — an open-source Kaiti (楷体) typeface under
+    // SIL OFL 1.1, popular for personalized UIs. Each release registers a
+    // different family name and Windows may expose the localized name, so
+    // list the common aliases instead of one spelling.
+    const LXGW_WENKAI = [
+      '霞鹜文楷', 'LXGW WenKai',
+      '霞鹜文楷 屏幕阅读版', 'LXGW WenKai Screen',
+      'LXGW WenKai Lite', 'LXGW WenKai TC',
+    ]
+    // The monospace variant is a real code face (installed on Windows as
+    // 霞鹜文楷等宽 / LXGWWenKaiMono Nerd Font).
+    const LXGW_WENKAI_MONO = [
+      '霞鹜文楷等宽', 'LXGW WenKai Mono', 'LXGWWenKaiMono Nerd Font',
+    ]
     const ZH_FONTS = [
       '微软雅黑', 'Microsoft YaHei', '宋体', 'SimSun', '黑体', 'SimHei',
       '楷体', 'KaiTi', '仿宋', 'FangSong', '思源黑体', 'Noto Sans CJK SC',
       '苹方', 'PingFang SC', '等线', 'DengXian',
+      ...LXGW_WENKAI,
     ]
     const CODE_FONTS = [
       'Consolas', 'Courier New', 'Menlo', 'Monaco', 'SF Mono',
       'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Source Code Pro',
       'DejaVu Sans Mono', 'Sarasa Mono SC', '等距更纱黑体', 'Roboto Mono',
+      ...LXGW_WENKAI_MONO,
     ]
     // Wider cross-platform candidate pool for the canvas probe. Real installed
     // families come from queryLocalFonts(); this pool is the permission-free
@@ -84,10 +100,11 @@ window.__ModuleLoader__.load({
         intro: 'Pick the UI fonts (Latin + Chinese), a code font and a global size offset. Fonts installed on this device are offered in every field. Settings are saved locally and restored on reload.',
         enLabel: 'UI font · Latin',
         zhLabel: 'UI font · Chinese',
+        zhHint: 'LXGW WenKai (霞鹜文楷) is an open-source Kaiti typeface — elegant glyphs and a community favourite for personalized UIs. Install it on this device before selecting it.',
         codeLabel: 'Code font',
         sizeLabel: 'Font size offset',
         phEn: 'e.g. Segoe UI, Arial',
-        phZh: 'e.g. Microsoft YaHei, Noto Sans CJK SC',
+        phZh: 'e.g. LXGW WenKai, Microsoft YaHei, Noto Sans CJK SC',
         phCode: 'e.g. Consolas, JetBrains Mono',
         zero: 'Reset',
         reset: 'Restore defaults',
@@ -112,10 +129,11 @@ window.__ModuleLoader__.load({
         intro: '自定义界面字体（英文 / 中文）、代码字体与全局字号偏移。本机已安装的字体会出现在每个选择列表中；设置保存在本机，刷新后自动恢复。',
         enLabel: 'UI 字体 · 英文',
         zhLabel: 'UI 字体 · 中文',
+        zhHint: '内置霞鹜文楷 (LXGW WenKai)：开源楷体（SIL OFL 1.1），字形优美、社区人气高，常用于个性化界面；需先在本机安装才能生效。',
         codeLabel: '代码字体',
         sizeLabel: '字体大小偏移',
         phEn: '例如 Segoe UI, Arial',
-        phZh: '例如 微软雅黑, 思源黑体',
+        phZh: '例如 霞鹜文楷, 微软雅黑, 思源黑体',
         phCode: '例如 Consolas, JetBrains Mono',
         zero: '归零',
         reset: '恢复默认',
@@ -423,6 +441,14 @@ window.__ModuleLoader__.load({
         h('datalist', { id: props.listId },
           props.options.map((name) => h('option', { key: name, value: name })),
         ),
+        props.hint
+          ? h('p', {
+              style: {
+                margin: '6px 0 0', fontSize: 12, lineHeight: 1.6,
+                color: 'var(--dsw-alias-label-secondary)',
+              },
+            }, props.hint)
+          : null,
       )
     }
 
@@ -491,7 +517,7 @@ window.__ModuleLoader__.load({
         }),
         h(Field, {
           label: t('zhLabel'), listId: SLOT_ID + '-zh-list', value: zh,
-          placeholder: t('phZh'), options: optZh,
+          placeholder: t('phZh'), hint: t('zhHint'), options: optZh,
           onChange: (e) => { setZh(e.target.value); applyFonts({ zh: e.target.value }) },
         }),
         h(Field, {
@@ -637,7 +663,8 @@ window.__ModuleLoader__.load({
         quoteList, buildCss, clampSize, mergeOptions, detectLang, t, setLang,
         loadSettings, saveSettings, loadFontCache, scanFonts, applyFonts,
         I18N, DEFAULT, SETTINGS_KEY, FONTS_KEY, SLOT_ID, EN_FONTS, ZH_FONTS,
-        CODE_FONTS, COMMON_FONTS, getState: () => ({ ...state }),
+        CODE_FONTS, COMMON_FONTS, LXGW_WENKAI, LXGW_WENKAI_MONO,
+        getState: () => ({ ...state }),
       },
       enumerable: false,
     })

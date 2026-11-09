@@ -58,7 +58,7 @@ Add this row to your profile's `cordis.patch.yml` (the plugin ships the same fil
 ```sh
 git clone https://github.com/liujia1128/dsh-custom-fonts.git
 cd dsh-custom-fonts
-node scripts/verify.mjs     # 16 headless checks
+node scripts/verify.mjs     # 17 headless checks
 npm pack                    # optional tarball for the plugin manager
 ```
 
@@ -77,7 +77,7 @@ Open **Settings → Fonts** (slot `settings.section`, id `dsh-custom-fonts`, ord
 | Control | How to use |
 | --- | --- |
 | **UI font · Latin** | Type or pick a family for Latin text, e.g. `Segoe UI, Inter, Arial`. |
-| **UI font · Chinese** | Type or pick a family for Han characters, e.g. `Microsoft YaHei, 思源黑体`. |
+| **UI font · Chinese** | Type or pick a family for Han characters, e.g. `LXGW WenKai, Microsoft YaHei, 思源黑体`. 霞鹜文楷 / LXGW WenKai (open-source Kaiti) is built into the list. |
 | **Code font** | Mono face for `pre`, `code`, `kbd`, `samp`, e.g. `JetBrains Mono, Consolas`. |
 | **Font-size offset** | Slider −4…+8 px; `0` removes the rule entirely. |
 | **Scan installed fonts** | Click to enumerate fonts available on this device; results merge into all three suggestion lists. |
@@ -85,6 +85,7 @@ Open **Settings → Fonts** (slot `settings.section`, id `dsh-custom-fonts`, ord
 
 Details worth knowing:
 
+- **LXGW WenKai (霞鹜文楷)** is bundled as a built-in Chinese font suggestion (plus `Screen` / `Lite` / `TC` and localized aliases); its monospace variant `霞鹜文楷等宽` / `LXGW WenKai Mono` is in the code font list. The plugin only emits family names — install the font on the device first (SIL OFL 1.1), otherwise the browser falls back to the next family in the stack.
 - **Comma-separated lists** are supported and quoted names work too. Names are escaped before entering CSS (backslashes, quotes, control characters, `;{}`, comment delimiters).
 - **Installed-font discovery** runs in three tiers: `window.queryLocalFonts()` for exact OS family names (Chromium may ask for permission) → canvas `measureText` probe over a ~70-name cross-platform pool → built-in suggestions, which always remain. The result is deduplicated, sorted, cached in `localStorage`, and silently re-probed at boot.
 - **Live preview** shows a mixed Latin/Chinese sample and a code-font sample so you can compare before committing.

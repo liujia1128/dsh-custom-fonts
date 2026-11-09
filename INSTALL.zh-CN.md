@@ -58,7 +58,7 @@
 ```sh
 git clone https://github.com/liujia1128/dsh-custom-fonts.git
 cd dsh-custom-fonts
-node scripts/verify.mjs     # 16 项无头检查
+node scripts/verify.mjs     # 17 项无头检查
 npm pack                    # 可选：给插件管理器用的 tarball
 ```
 
@@ -77,7 +77,7 @@ npm pack                    # 可选：给插件管理器用的 tarball
 | 控件 | 用法 |
 | --- | --- |
 | **UI 字体 · 英文** | 输入或选择拉丁文字字体，如 `Segoe UI, Inter, Arial`。 |
-| **UI 字体 · 中文** | 输入或选择汉字字体，如 `Microsoft YaHei, 思源黑体`。 |
+| **UI 字体 · 中文** | 输入或选择汉字字体，如 `霞鹜文楷, Microsoft YaHei, 思源黑体`。内置霞鹜文楷 / LXGW WenKai 开源楷体。 |
 | **代码字体** | `pre`、`code`、`kbd`、`samp` 的等宽字体，如 `JetBrains Mono, Consolas`。 |
 | **字号偏移** | 滑杆 −4…+8 px；取 `0` 时整条规则不生成。 |
 | **扫描本机字体** | 点击后枚举本机可用字体，结果合并进三个候选列表。 |
@@ -85,6 +85,7 @@ npm pack                    # 可选：给插件管理器用的 tarball
 
 几点说明：
 
+- **霞鹜文楷 (LXGW WenKai)** 已内置到中文字体建议（`Screen` / `Lite` / `TC` 及中文别名一并收录），等宽版「霞鹜文楷等宽」/ `LXGW WenKai Mono` 在代码字体列表。插件只写入字体族名称，不含字体文件，需先在本机安装（SIL OFL 1.1），否则浏览器会回退到字体栈中的下一款。
 - 支持**逗号分隔的字体列表**，带引号的名称也可用；写入 CSS 前会转义（反斜杠、引号、控制字符、`;{}`、注释定界符）。
 - **本机字体发现**分三级：`window.queryLocalFonts()` 拿精确系统字体名（Chromium 可能请求权限）→ canvas `measureText` 探测约 70 个跨平台候选名 → 内置建议（始终保留）。结果去重排序、缓存在 `localStorage`，启动时静默重探。
 - **实时预览**里有中英混排示例和代码字体示例，改之前可以先对比。

@@ -13,9 +13,10 @@ All notable changes to this project are documented here. Versions follow [Semant
 
 ### Added
 
+- **霞鹜文楷 (LXGW WenKai)**：把这款开源楷体（SIL OFL 1.1，字形优美、社区人气高，常用于个性化界面）加入「UI 字体 · 中文」内置建议；同时收录 `霞鹜文楷 屏幕阅读版` / `LXGW WenKai Screen` / `LXGW WenKai Lite` / `LXGW WenKai TC` 等别名，等宽版 `霞鹜文楷等宽` / `LXGW WenKai Mono` / `LXGWWenKaiMono Nerd Font` 放进代码字体列表。别名自动进入启动时的 canvas 探测池；中英文字段的 placeholder 与字段说明同步提示（插件只写入字体族名称，不含字体文件，需本机已安装）。`package.json` 关键词与 `scripts/verify.mjs` 断言同步（16 → 17 项）。
 - **本机已安装字体**：新增「扫描本机字体」按钮与三级发现链 —— `window.queryLocalFonts()`（精确系统字体名）→ canvas `measureText` 探测（约 70 个跨平台候选池）→ 内置建议；去重排序后合并进英文 / 中文 / 代码三个 `<datalist>`，结果缓存在 `dsh-custom-fonts:fonts:v1`，启动时静默探测并回填。
 - **CSS 转义硬化**：`quoteList` 现在处理反斜杠、单双引号、控制字符、`;{}`、注释定界符，避免真实系统字体名破坏规则；顺手删掉从未被 `var()` 引用的 `--dsh-custom-fonts-en/-zh` 死变量。
-- **无头验证扩展**：`scripts/verify.mjs` 从 3 项扩到 16 项，通过 `surface.__internals` 直接断言 `buildCss` / `quoteList` / `clampSize` / 持久化重放 / 字体发现 / i18n / manifest / 发布元数据 / 安装文档，并新增 `npm run verify`。
+- **无头验证扩展**：`scripts/verify.mjs` 从 3 项扩到 17 项，通过 `surface.__internals` 直接断言 `buildCss` / `quoteList` / `clampSize` / 持久化重放 / 字体发现 / i18n / manifest / 发布元数据 / 安装文档，并新增 `npm run verify`。
 - slot id 由无命名空间的 `fonts` 改为 `dsh-custom-fonts`；`slots.register` 第二参改为直接传组件 `FontPage`（原先传的是 thunk）；`ctx.effect` 清理函数同时移除样式表与 locale 订阅。
 - `lib/index.js` 注释说明为何 Host 半区保持空实现（无可用的 package-private RPC 注册契约）。
 
@@ -25,7 +26,7 @@ All notable changes to this project are documented here. Versions follow [Semant
 - README / README.zh-CN 全文重写：CSS 示例、持久化说明、字体发现机制、扁平根级偏移的限制（固定 px 字号元素不受影响）。
 - 仓库地址迁移到 `https://github.com/liujia1128/dsh-custom-fonts.git`；`repository` / `homepage` / `bugs` 与 PUBLISHING.md、两份 README 全量同步。
 - 新增独立安装使用说明 `INSTALL.md` / `INSTALL.zh-CN.md`（三种安装方式、控件说明、生效步骤、卸载回滚、故障排查）；两份 README 改为带 v1.2.0 版本标识的快速上手页并链接到安装说明。
-- `scripts/verify.mjs` 增加发布元数据 / 安装文档 / 仓库地址一致性检查（14 项 → 16 项）。
+- `scripts/verify.mjs` 增加发布元数据 / 安装文档 / 仓库地址一致性检查（14 项 → 17 项）。
 
 ## [1.1.0] - 2026-08-24
 
