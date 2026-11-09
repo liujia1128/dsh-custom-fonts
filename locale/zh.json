@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "title": "自定义字体",
+    "description": "自定义界面中英文字体、代码字体与全局字号偏移，并可从本机已安装的字体中选择。"
+  },
+  "title": "字体",
+  "intro": "自定义界面字体（英文 / 中文）、代码字体与全局字号偏移。本机已安装的字体会出现在每个选择列表中；设置保存在本机，刷新后自动恢复。",
+  "enLabel": "UI 字体 · 英文",
+  "zhLabel": "UI 字体 · 中文",
+  "codeLabel": "代码字体",
+  "sizeLabel": "字体大小偏移",
+  "phEn": "例如 Segoe UI, Arial",
+  "phZh": "例如 微软雅黑, 思源黑体",
+  "phCode": "例如 Consolas, JetBrains Mono",
+  "zero": "归零",
+  "reset": "恢复默认",
+  "scan": "扫描本机字体",
+  "scanning": "正在扫描…",
+  "scanDone": "已发现 {n} 款字体",
+  "scanFail": "当前环境不支持字体扫描，仍可使用内置建议。",
+  "installed": "可选 {n} 款字体 · {source}",
+  "source_os": "本地字体 API",
+  "source_probe": "字体探测",
+  "source_auto": "自动探测",
+  "source_cache": "缓存",
+  "source_builtin": "内置建议",
+  "note": "字号偏移只在 :root 应用一次（作用于 em/rem 基准），不会在嵌套元素上逐层累加；使用固定 px 字号的元素保持原样。",
+  "previewLatin": "The quick brown fox jumps over the lazy dog 0123456789",
+  "previewCjk": "敏捷的棕色狐狸跳过了懒狗 0123456789",
+  "codeSample": "const font = \"ui + code\"; return 0x2f;  // 代码字体预览",
+  "codeSampleEmpty": "const demo = \"set your code font\";  // 代码字体预览"
+}

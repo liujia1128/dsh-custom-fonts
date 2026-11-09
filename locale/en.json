@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "title": "Custom fonts",
+    "description": "Set the UI's Latin and Chinese fonts, the code font and a flat global font-size offset; pick from the fonts installed on this device."
+  },
+  "title": "Fonts",
+  "intro": "Pick the UI fonts (Latin + Chinese), a code font and a global size offset. Fonts installed on this device are offered in every field. Settings are saved locally and restored on reload.",
+  "enLabel": "UI font · Latin",
+  "zhLabel": "UI font · Chinese",
+  "codeLabel": "Code font",
+  "sizeLabel": "Font size offset",
+  "phEn": "e.g. Segoe UI, Arial",
+  "phZh": "e.g. Microsoft YaHei, Noto Sans CJK SC",
+  "phCode": "e.g. Consolas, JetBrains Mono",
+  "zero": "Reset",
+  "reset": "Restore defaults",
+  "scan": "Scan installed fonts",
+  "scanning": "Scanning…",
+  "scanDone": "Found {n} fonts",
+  "scanFail": "Font scan is unavailable here; built-in suggestions remain.",
+  "installed": "{n} fonts available · {source}",
+  "source_os": "local font access",
+  "source_probe": "font probe",
+  "source_auto": "auto-detected",
+  "source_cache": "cached",
+  "source_builtin": "built-in",
+  "note": "The offset is applied once at :root (em/rem basis), so it does not compound on nested elements. Elements with a fixed px font-size keep their own size.",
+  "previewLatin": "The quick brown fox jumps over the lazy dog 0123456789",
+  "previewCjk": "敏捷的棕色狐狸跳过了懒狗 0123456789",
+  "codeSample": "const font = \"ui + code\"; return 0x2f;  // code font preview",
+  "codeSampleEmpty": "const demo = \"set your code font\";  // code font preview"
+}

@@ -1,0 +1,73 @@
+{
+  "name": "dsh-custom-fonts",
+  "version": "1.2.0",
+  "description": "Customize the DeepSeek Harness UI's Latin/Chinese fonts, code font and flat global font-size offset — with locally installed font discovery, saved settings and a bilingual settings page. 在设置页自定义界面中英文/代码字体与字号偏移，自动列出本机已安装字体，设置持久化，中英双语界面。",
+  "license": "MIT",
+  "type": "module",
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "dsh-plugin",
+    "cordis",
+    "font",
+    "fonts",
+    "font-size",
+    "code font",
+    "chinese",
+    "english",
+    "local-fonts",
+    "ui",
+    "等宽",
+    "代码字体",
+    "字体",
+    "中文字体",
+    "英文字体",
+    "字号"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liujia1128/dsh-custom-fonts.git"
+  },
+  "homepage": "https://github.com/liujia1128/dsh-custom-fonts",
+  "bugs": {
+    "url": "https://github.com/liujia1128/dsh-custom-fonts/issues"
+  },
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./client/client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "verify": "node scripts/verify.mjs"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true
+    }
+  },
+  "files": [
+    "lib",
+    "client",
+    "scripts/verify.mjs",
+    "locale/*.json",
+    "icon.svg",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh-CN.md",
+    "INSTALL.md",
+    "INSTALL.zh-CN.md",
+    "CHANGELOG.md",
+    "PUBLISHING.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
